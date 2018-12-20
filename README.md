@@ -5,7 +5,7 @@ Node module that accepts input in the form of an array of bills to make change f
 ## Usage
 
 ```javascript
-const changer = new MakeChange({ bills: [10, 5, 1] });
+const changer = new MakeChange({ bills: [20, 100, 20, 5, 1] });
 
 const output = changer.processBills();
 ```
@@ -14,8 +14,16 @@ the output looks like the following:
 
 ```javascript
 [
-  [20, { success: true, message: "Success", "25": 80 }],
-  [20, { success: true, message: "Success", "5": 100, "10": 100, "25": 20 }],
+  [20, { "25": 80, success: true, message: "Success" }],
+  [
+    100,
+    {
+      success: false,
+      message:
+        "Sorry only $21 in coins remaining.\nCan't make change for a $100 bill."
+    }
+  ],
+  [20, { "5": 100, "10": 100, "25": 20, success: true, message: "Success" }],
   [
     5,
     {
@@ -23,6 +31,7 @@ the output looks like the following:
       message:
         "Sorry only $1 in coins remaining.\nCan't make change for a $5 bill."
     }
-  ]
+  ],
+  [1, { "1": 100, success: true, message: "Success" }]
 ];
 ```
