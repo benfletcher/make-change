@@ -112,4 +112,37 @@ describe("Make change for specified list of bills", () => {
 
     expect(output).toEqual(expected);
   });
+
+  it("can process list of coins and skip large bills", () => {
+    const bills = [20, 100, 20, 5, 1];
+    const changer = new MakeChange({ bills });
+    const output = changer.processBills();
+    console.log(output);
+    const expected = [
+      [20, { "25": 80, success: true, message: "Success" }],
+      [
+        100,
+        {
+          success: false,
+          message:
+            "Sorry only $21 in coins remaining.\nCan't make change for a $100 bill."
+        }
+      ],
+      [
+        20,
+        { "5": 100, "10": 100, "25": 20, success: true, message: "Success" }
+      ],
+      [
+        5,
+        {
+          success: false,
+          message:
+            "Sorry only $1 in coins remaining.\nCan't make change for a $5 bill."
+        }
+      ],
+      [1, { "1": 100, success: true, message: "Success" }]
+    ];
+
+    expect(output).toEqual(expected);
+  });
 });
