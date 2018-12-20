@@ -22,7 +22,7 @@ describe("Make change for specified list of bills", () => {
     expect(changer.canMakeChange(100)).toBeFalsy();
   });
 
-  it("throws if can't make change", () => {
+  it("message if can't make change", () => {
     const bills = [100, 50];
     const changer = new MakeChange({ bills });
     const output = changer.processOneBill(100);
@@ -30,24 +30,18 @@ describe("Make change for specified list of bills", () => {
     expect(output.success).toBeFalsy;
   });
 
-  describe("can process one bill from list, 1 dollar bill", () => {
+  it("calculates coins for one dollar", () => {
     const bills = [1, 5, 10];
     const changer = new MakeChange({ bills });
     const resultCoins = changer.processOneBill(1);
-
-    it("calculates coins for one dollar", () => {
-      expect(resultCoins[25]).toEqual(4);
-    });
+    expect(resultCoins[25]).toEqual(4);
   });
 
-  describe("can process one bill from list, 5 dollar bill", () => {
+  it("calculates coins for 5 dollar bill", () => {
     const bills = [5, 10];
     const changer = new MakeChange({ bills });
     const resultCoins = changer.processOneBill(5);
-
-    it("calculates coins for 5 dollar bill", () => {
-      expect(resultCoins[25]).toEqual(20);
-    });
+    expect(resultCoins[25]).toEqual(20);
   });
 
   it("can process list of coins without throwing", () => {

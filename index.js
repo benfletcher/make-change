@@ -41,16 +41,17 @@ class MakeChange {
   }
 
   processOneBill(billToChange) {
-    let bill = billToChange * 100; // Dealing with $$ and base 2 Number type -> use pennies
-
-    if (!this.canMakeChange(bill / 100)) {
+    if (!this.canMakeChange(billToChange)) {
       return {
         success: false,
         message:
           `Sorry only $${this.totalCoinValue()} in coins remaining.\n` +
-          `Can't make change for a $${bill / 100} bill.`
+          `Can't make change for a $${billToChange} bill.`
       };
     }
+
+    // Dealing with $$ and base 2 Number type -> use pennies
+    let bill = billToChange * 100;
 
     const coins = { success: true, message: "Success" };
 
