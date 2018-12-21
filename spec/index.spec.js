@@ -55,6 +55,7 @@ describe("Make change for specified list of bills", () => {
     const bills = [20];
     const changer = new MakeChange({ bills });
     const output = changer.processBills();
+
     const expected = [[20, { success: true, message: "Success", 25: 80 }]];
 
     expect(output).toEqual(expected);
@@ -64,6 +65,7 @@ describe("Make change for specified list of bills", () => {
     const bills = [20, 5];
     const changer = new MakeChange({ bills });
     const output = changer.processBills();
+
     const expected = [
       [20, { success: true, message: "Success", 25: 80 }],
       [5, { success: true, message: "Success", 25: 20 }]
@@ -117,7 +119,7 @@ describe("Make change for specified list of bills", () => {
     const bills = [20, 100, 20, 5, 1];
     const changer = new MakeChange({ bills });
     const output = changer.processBills();
-    console.log(output);
+
     const expected = [
       [20, { "25": 80, success: true, message: "Success" }],
       [
