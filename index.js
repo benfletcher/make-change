@@ -53,7 +53,7 @@ class MakeChange {
     // Dealing with $$ and base 2 Number type -> use pennies
     let bill = billToChange * 100;
 
-    const coins = { success: true, message: "Success" };
+    const coins = { success: true, message: "Success", coins: {} };
 
     while (bill > 0 && this.coinCounts.size > 0) {
       const [biggestDenom, qty] = [...this.coinCounts][0];
@@ -64,7 +64,7 @@ class MakeChange {
       }
 
       bill -= biggestDenom;
-      coins[biggestDenom] = (coins[biggestDenom] || 0) + 1;
+      coins.coins[biggestDenom] = (coins.coins[biggestDenom] || 0) + 1;
       this.coinCounts.set(biggestDenom, qty - 1);
     }
 

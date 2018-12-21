@@ -10,11 +10,11 @@ const changer = new MakeChange({ bills: [20, 100, 20, 5, 1] });
 const output = changer.processBills();
 ```
 
-the output looks like the following:
+Output sample (from above input):
 
 ```javascript
 [
-  [20, { "25": 80, success: true, message: "Success" }],
+  [20, { coins: { "25": 80 }, success: true, message: "Success" }],
   [
     100,
     {
@@ -23,7 +23,14 @@ the output looks like the following:
         "Sorry only $21 in coins remaining.\nCan't make change for a $100 bill."
     }
   ],
-  [20, { "5": 100, "10": 100, "25": 20, success: true, message: "Success" }],
+  [
+    20,
+    {
+      coins: { "5": 100, "10": 100, "25": 20 },
+      success: true,
+      message: "Success"
+    }
+  ],
   [
     5,
     {
@@ -32,6 +39,6 @@ the output looks like the following:
         "Sorry only $1 in coins remaining.\nCan't make change for a $5 bill."
     }
   ],
-  [1, { "1": 100, success: true, message: "Success" }]
+  [1, { coins: { "1": 100 }, success: true, message: "Success" }]
 ];
 ```

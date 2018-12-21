@@ -34,14 +34,14 @@ describe("Make change for specified list of bills", () => {
     const bills = [1, 5, 10];
     const changer = new MakeChange({ bills });
     const resultCoins = changer.processOneBill(1);
-    expect(resultCoins[25]).toEqual(4);
+    expect(resultCoins.coins[25]).toEqual(4);
   });
 
   it("calculates coins for 5 dollar bill", () => {
     const bills = [5, 10];
     const changer = new MakeChange({ bills });
     const resultCoins = changer.processOneBill(5);
-    expect(resultCoins[25]).toEqual(20);
+    expect(resultCoins.coins[25]).toEqual(20);
   });
 
   it("can process list of coins without throwing", () => {
@@ -56,7 +56,9 @@ describe("Make change for specified list of bills", () => {
     const changer = new MakeChange({ bills });
     const output = changer.processBills();
 
-    const expected = [[20, { success: true, message: "Success", 25: 80 }]];
+    const expected = [
+      [20, { success: true, message: "Success", coins: { 25: 80 } }]
+    ];
 
     expect(output).toEqual(expected);
   });
@@ -67,8 +69,8 @@ describe("Make change for specified list of bills", () => {
     const output = changer.processBills();
 
     const expected = [
-      [20, { success: true, message: "Success", 25: 80 }],
-      [5, { success: true, message: "Success", 25: 20 }]
+      [20, { success: true, message: "Success", coins: { 25: 80 } }],
+      [5, { success: true, message: "Success", coins: { 25: 20 } }]
     ];
 
     expect(output).toEqual(expected);
@@ -80,12 +82,16 @@ describe("Make change for specified list of bills", () => {
     const output = changer.processBills();
 
     const expected = [
-      [20, { success: true, message: "Success", "25": 80 }],
+      [20, { success: true, message: "Success", coins: { "25": 80 } }],
       [
         20,
-        { success: true, message: "Success", "5": 100, "10": 100, "25": 20 }
+        {
+          success: true,
+          message: "Success",
+          coins: { "5": 100, "10": 100, "25": 20 }
+        }
       ],
-      [1, { success: true, message: "Success", "1": 100 }]
+      [1, { success: true, message: "Success", coins: { "1": 100 } }]
     ];
 
     expect(output).toEqual(expected);
@@ -97,10 +103,14 @@ describe("Make change for specified list of bills", () => {
     const output = changer.processBills();
 
     const expected = [
-      [20, { success: true, message: "Success", "25": 80 }],
+      [20, { success: true, message: "Success", coins: { "25": 80 } }],
       [
         20,
-        { success: true, message: "Success", "5": 100, "10": 100, "25": 20 }
+        {
+          success: true,
+          message: "Success",
+          coins: { "5": 100, "10": 100, "25": 20 }
+        }
       ],
       [
         5,
@@ -121,7 +131,7 @@ describe("Make change for specified list of bills", () => {
     const output = changer.processBills();
 
     const expected = [
-      [20, { "25": 80, success: true, message: "Success" }],
+      [20, { coins: { "25": 80 }, success: true, message: "Success" }],
       [
         100,
         {
@@ -132,7 +142,11 @@ describe("Make change for specified list of bills", () => {
       ],
       [
         20,
-        { "5": 100, "10": 100, "25": 20, success: true, message: "Success" }
+        {
+          coins: { "5": 100, "10": 100, "25": 20 },
+          success: true,
+          message: "Success"
+        }
       ],
       [
         5,
@@ -142,7 +156,7 @@ describe("Make change for specified list of bills", () => {
             "Sorry only $1 in coins remaining.\nCan't make change for a $5 bill."
         }
       ],
-      [1, { "1": 100, success: true, message: "Success" }]
+      [1, { coins: { "1": 100 }, success: true, message: "Success" }]
     ];
 
     expect(output).toEqual(expected);
