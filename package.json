@@ -11,14 +11,14 @@
     "url": "git+https://github.com/benfletcher/make-change.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ben Fletcher",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/benfletcher/make-change/issues"
   },
   "homepage": "https://github.com/benfletcher/make-change#readme",
   "dependencies": {
-    "commander": "^2.19.0",
+    "inquirer": "^6.2.1",
     "jasmine": "^3.3.1"
   }
 }
